@@ -76,7 +76,6 @@ def load_data(city, month, day):
 
     return df
 
-
 def time_stats(df, month, day):
     """Displays statistics on the most frequent times of travel."""
     print('\nCalculating The Most Frequent Times of Travel...\n')
@@ -85,25 +84,27 @@ def time_stats(df, month, day):
     # Display the most common month
     if month == 'none':
         popular_month = df['month'].mode()[0]
-        print(f"The most popular month: {popular_month.capitalize()}")
+        month_trips = df[df['month'] == popular_month].shape[0]
+        print(f"The most popular month is: {popular_month.capitalize()} (with {month_trips} trips)")
     else:
         print("Statistics for the most popular month aren't shown because data is filtered by month.")
 
     # Display the most common day of week
     if day == 'none':
         popular_day = df['day_of_week'].mode()[0]
-        print(f"The most popular day of week: {popular_day.capitalize()}")
+        day_trips = df[df['day_of_week'] == popular_day].shape[0]
+        print(f"The most popular day of week: {popular_day.capitalize()} (with {day_trips} trips)")
     else:
         print("Statistics for the most popular day of the week aren't shown because data is filtered by day.")
 
     # Display the most common start hour
     df['Hour'] = df['Start Time'].dt.hour
     popular_hour = df['Hour'].mode()[0]
-    print(f"The most popular start hour: {popular_hour}")
+    hour_trips = df[df['Hour'] == popular_hour].shape[0]
+    print(f"The most popular start hour: {popular_hour} (with {hour_trips} trips)")
 
     print("\nThis took %s seconds to calculate." % (time.time() - start_time))
     print('-' * 40)
-
 
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
@@ -112,20 +113,22 @@ def station_stats(df):
 
     # Display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
-    print(f"The most popular start station: {popular_start_station}")
+    start_station_trips = df[df['Start Station'] == popular_start_station].shape[0]
+    print(f"The most popular start station: {popular_start_station} (with {start_station_trips} trips)")
 
     # Display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
-    print(f"The most popular end station: {popular_end_station}")
+    end_station_trips = df[df['End Station'] == popular_end_station].shape[0]
+    print(f"The most popular end station: {popular_end_station} (with {end_station_trips} trips)")
 
     # Display most frequent combination of start station and end station trip
     df['Trip'] = df['Start Station'] + ' to ' + df['End Station']
     popular_trip = df['Trip'].mode()[0]
-    print(f"The most popular trip: {popular_trip}")
+    trip_trips = df[df['Trip'] == popular_trip].shape[0]
+    print(f"The most popular trip: {popular_trip} (with {trip_trips} trips)")
 
     print("\nThis took %s seconds to calculate." % (time.time() - start_time))
     print('-' * 40)
-
 
 def format_duration(duration, units):
     """Formats the duration and units as a string."""
@@ -136,6 +139,9 @@ def trip_duration_stats(df):
 
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
+
+    # Count the number of trips
+    num_trips = df.shape[0]
 
     # Calculate total travel time in seconds
     total_travel_time = df['Trip Duration'].sum()
@@ -203,10 +209,10 @@ def trip_duration_stats(df):
 
     print(f"Total travel time: {total_travel_time}")
     print(f"Mean travel time: {mean_travel_time}")
+    print(f"\nTotal number of trips: {num_trips}")
 
     print("\nThis took %s seconds to calculate." % (time.time() - start_time))
     print('-' * 40)
-
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""

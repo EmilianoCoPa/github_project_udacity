@@ -76,7 +76,6 @@ def load_data(city, month, day):
 
     return df
 
-
 def time_stats(df, month, day):
     """Displays statistics on the most frequent times of travel."""
     print('\nCalculating The Most Frequent Times of Travel...\n')
@@ -107,7 +106,6 @@ def time_stats(df, month, day):
     print("\nThis took %s seconds to calculate." % (time.time() - start_time))
     print('-' * 40)
 
-
 def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
     print('\nCalculating The Most Popular Stations and Trip...\n')
@@ -115,20 +113,22 @@ def station_stats(df):
 
     # Display most commonly used start station
     popular_start_station = df['Start Station'].mode()[0]
-    print(f"The most popular start station: {popular_start_station}")
+    start_station_trips = df[df['Start Station'] == popular_start_station].shape[0]
+    print(f"The most popular start station: {popular_start_station} (with {start_station_trips} trips)")
 
     # Display most commonly used end station
     popular_end_station = df['End Station'].mode()[0]
-    print(f"The most popular end station: {popular_end_station}")
+    end_station_trips = df[df['End Station'] == popular_end_station].shape[0]
+    print(f"The most popular end station: {popular_end_station} (with {end_station_trips} trips)")
 
     # Display most frequent combination of start station and end station trip
     df['Trip'] = df['Start Station'] + ' to ' + df['End Station']
     popular_trip = df['Trip'].mode()[0]
-    print(f"The most popular trip: {popular_trip}")
+    trip_trips = df[df['Trip'] == popular_trip].shape[0]
+    print(f"The most popular trip: {popular_trip} (with {trip_trips} trips)")
 
     print("\nThis took %s seconds to calculate." % (time.time() - start_time))
     print('-' * 40)
-
 
 def format_duration(duration, units):
     """Formats the duration and units as a string."""

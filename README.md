@@ -1,7 +1,7 @@
 # Explore US Bikeshare Data
 _Project: Post Your Work on GitHub_ 06/23/2023
 
-### Description
+## Description
 In this project, I used data provided by _Motivate_, a bike share system provider for many major cities in the United States, to uncover bike share usage patterns. I compared the system usage between three large cities: Chicago, New York City, and Washington DC.
 
 #### The Datasets

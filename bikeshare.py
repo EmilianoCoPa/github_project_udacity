@@ -140,6 +140,9 @@ def trip_duration_stats(df):
     print('\nCalculating Trip Duration...\n')
     start_time = time.time()
 
+    # Count the number of trips
+    num_trips = df.shape[0]
+
     # Calculate total travel time in seconds
     total_travel_time = df['Trip Duration'].sum()
 
@@ -206,10 +209,10 @@ def trip_duration_stats(df):
 
     print(f"Total travel time: {total_travel_time}")
     print(f"Mean travel time: {mean_travel_time}")
+    print(f"\nTotal number of trips: {num_trips}")
 
     print("\nThis took %s seconds to calculate." % (time.time() - start_time))
     print('-' * 40)
-
 
 def user_stats(df):
     """Displays statistics on bikeshare users."""

@@ -85,21 +85,24 @@ def time_stats(df, month, day):
     # Display the most common month
     if month == 'none':
         popular_month = df['month'].mode()[0]
-        print(f"The most popular month: {popular_month.capitalize()}")
+        month_trips = df[df['month'] == popular_month].shape[0]
+        print(f"The most popular month is: {popular_month.capitalize()} (with {month_trips} trips)")
     else:
         print("Statistics for the most popular month aren't shown because data is filtered by month.")
 
     # Display the most common day of week
     if day == 'none':
         popular_day = df['day_of_week'].mode()[0]
-        print(f"The most popular day of week: {popular_day.capitalize()}")
+        day_trips = df[df['day_of_week'] == popular_day].shape[0]
+        print(f"The most popular day of week: {popular_day.capitalize()} (with {day_trips} trips)")
     else:
         print("Statistics for the most popular day of the week aren't shown because data is filtered by day.")
 
     # Display the most common start hour
     df['Hour'] = df['Start Time'].dt.hour
     popular_hour = df['Hour'].mode()[0]
-    print(f"The most popular start hour: {popular_hour}")
+    hour_trips = df[df['Hour'] == popular_hour].shape[0]
+    print(f"The most popular start hour: {popular_hour} (with {hour_trips} trips)")
 
     print("\nThis took %s seconds to calculate." % (time.time() - start_time))
     print('-' * 40)
